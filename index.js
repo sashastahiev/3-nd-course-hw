@@ -19,10 +19,19 @@ const addCommentEl = document.getElementById("addComment");
 const nameEl = document.getElementById("name-user");
 const textcommentEl = document.getElementById("text-comment");
 const dateEl = new Date();
+const AnswerButton = () => {
+  const commentList = document.querySelectorAll(".comment");
+  for (const comment of commentList){
+    comment.addEventListener("click", () => {
+      textcommentEl.innerHTML = `"${comments[comment.dataset.indexcomm].comm}" (${comments[comment.dataset.indexcomm].nick}),`;
+    });
+  }
+}
 const initLikeButton = () => {
     const LikeButtons = document.querySelectorAll(".like-button");
     for (const likeButton of LikeButtons){
-        likeButton.addEventListener("click", () =>{
+        likeButton.addEventListener("click", (event) =>{
+            event.stopPropagation();
             if (!comments[likeButton.dataset.index].status){
                 comments[likeButton.dataset.index].like++;
                 comments[likeButton.dataset.index].status = true;
@@ -40,7 +49,7 @@ const initLikeButton = () => {
 };
 const renderComments = () => {
     const newListComments = comments.map((comment,index) => {
-        return `<li class="comment">
+        return `<li class="comment" data-indexcomm="${index}">
           <div class="comment-header">
             <div>${comment.nick}</div>
             <div>${comment.date}</div>
@@ -65,6 +74,7 @@ const renderComments = () => {
         }
     };
     initLikeButton();
+    AnswerButton();
 }
 function format(date){
     let day = date.getDate();
@@ -82,15 +92,15 @@ function format(date){
     return `${day}.${month}.${year} ${date.getHours()}:${minute}`;
 }
 addCommentEl.addEventListener("click", () => {
-if(nameEl.value !== "" && textcommentEl.value !== ""){
-    comments.push({
-        nick:nameEl.value, 
-        date:format(dateEl),
-        comm:textcommentEl.value,
-        like: 0,
-        status: false}
-    );
-    renderComments();
+  if(nameEl.value !== "" && textcommentEl.value !== ""){
+      comments.push({
+          nick: nameEl.value.replaceAll("<","&lt").replaceAll(">","&gt"), 
+          date: format(dateEl),
+          comm: textcommentEl.value.replaceAll("<","&lt").replaceAll(">","&gt"),
+          like: 0,
+          status: false}
+      );
+      renderComments();
     }
 });
 renderComments();

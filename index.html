@@ -4,55 +4,26 @@
     <title>Проект "Комменты"</title>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="styles.css" />
+    <style>
+      .activeLike{
+        background-image: url("image/Like-Activ.svg");
+      }
+    </style>
   </head>
-
   <body>
     <div class="container">
-      <ul id="comment" class="comments">
-        <li class="comment">
-          <div class="comment-header">
-            <div>Глеб Фокин</div>
-            <div>12.02.22 12:18</div>
-          </div>
-          <div class="comment-body">
-            <div class="comment-text">
-              Это будет первый комментарий на этой странице
-            </div>
-          </div>
-          <div class="comment-footer">
-            <div class="likes">
-              <span class="likes-counter">3</span>
-              <button class="like-button"></button>
-            </div>
-          </div>
-        </li>
-        <li class="comment">
-          <div class="comment-header">
-            <div>Варвара Н.</div>
-            <div>13.02.22 19:22</div>
-          </div>
-          <div class="comment-body">
-            <div class="comment-text">
-              Мне нравится как оформлена эта страница! ❤
-            </div>
-          </div>
-          <div class="comment-footer">
-            <div class="likes">
-              <span class="likes-counter">75</span>
-              <button class="like-button -active-like"></button>
-            </div>
-          </div>
-        </li>
+      <ul id="comments" class="comments">
+        <!-- Комментарии -->
       </ul>
       <div class="add-form">
         <input 
-          id="nameuser"
+          id="name-user"
           type="text"
           class="add-form-name"
           placeholder="Введите ваше имя"
         />
         <textarea
-          id="textComment"
+          id="text-comment"
           type="textarea"
           class="add-form-text"
           placeholder="Введите ваш коментарий"
@@ -65,53 +36,5 @@
     </div>
   </body>
 
-  <script>
-    "use strict";
-    function format(date){
-      let day = date.getDate();
-      let month = date.getMonth();
-      let year = date.getFullYear();
-      let minute = date.getMinutes();
-      if (Number(day) < 10) 
-        day = '0' + String(day);
-      if (Number(month) < 10) 
-        month = '0' + String(month);
-      if (Number(minute) < 10)
-        minute = '0' + String(minute);
-      let mas = String(year).split('');
-      year = mas[2] + mas[3];
-
-      return `${day}.${month}.${year} ${date.getHours()}:${minute}`;
-
-    }
-    const commentEl = document.getElementById("comment");
-    const addCommentEl = document.getElementById("addComment");
-    const nameEl = document.getElementById("nameuser");
-    const textcommentEl = document.getElementById("textComment");
-    const dateEl = new Date();
-    addCommentEl.addEventListener("click", () => {
-      if(name.value !== "" && textcommentEl.value !== ""){
-        const oldList = commentEl.innerHTML;
-        commentEl.innerHTML = oldList + `
-          <li class="comment">
-            <div class="comment-header">
-              <div>${nameEl.value}</div>
-              <div>${format(dateEl)}</div>
-            </div>
-            <div class="comment-body">
-              <div class="comment-text">
-              ${textcommentEl.value}
-              </div>
-            </div>
-            <div class="comment-footer">
-              <div class="likes">
-                <span class="likes-counter">0</span>
-                <button class="like-button"></button>
-              </div>
-            </div>
-          </li>`;
-      }
-    });
-    console.log("It works");
-  </script>
+  <script src="index.js"></script>
 </html>

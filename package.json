@@ -19,5 +19,13 @@
   "homepage": "https://github.com/sashastahiev/3-nd-course-hw#readme",
   "dependencies": {
     "date-fns": "^4.1.0"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.25.1",
+    "eslint": "^9.25.1",
+    "eslint-config-prettier": "^10.1.2",
+    "eslint-plugin-prettier": "^5.2.6",
+    "globals": "^16.0.0",
+    "prettier": "^3.5.3"
   }
 }

@@ -7,17 +7,17 @@ export const renderComments = () => {
         .map((comment, index) => {
             return `<li class="comment" data-indexcomm="${index}">
           <div class="comment-header">
-            <div>${comment.nick}</div>
+            <div>${comment["author"]["name"]}</div>
             <div>${comment.date}</div>
           </div>
           <div class="comment-body">
             <div class="comment-text">
-            ${comment.comm}
+            ${comment.text}
             </div>
           </div>
           <div class="comment-footer">
             <div class="likes">
-              <span class="likes-counter">${comment.like}</span>
+              <span class="likes-counter">${comment.likes}</span>
               <button class="like-button" data-index="${index}"></button>
             </div>
           </div>
@@ -27,7 +27,7 @@ export const renderComments = () => {
     commentEl.innerHTML = newListComments
     const LikeButtons = document.querySelectorAll('.like-button')
     for (const likeButton of LikeButtons) {
-        if (comments[likeButton.dataset.index].status) {
+        if (comments[likeButton.dataset.index].isLiked) {
             likeButton.classList.add('activeLike')
         }
     }

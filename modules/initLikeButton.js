@@ -5,14 +5,14 @@ export const initLikeButton = () => {
     for (const likeButton of LikeButtons) {
         likeButton.addEventListener('click', (event) => {
             event.stopPropagation()
-            if (!comments[likeButton.dataset.index].status) {
-                comments[likeButton.dataset.index].like++
-                comments[likeButton.dataset.index].status = true
+            if (!comments[likeButton.dataset.index].isLiked) {
+                comments[likeButton.dataset.index].likes++
+                comments[likeButton.dataset.index].isLiked = true
                 renderComments()
                 likeButton.classList.add('activeLike')
             } else {
-                comments[likeButton.dataset.index].like--
-                comments[likeButton.dataset.index].status = false
+                comments[likeButton.dataset.index].likes--
+                comments[likeButton.dataset.index].isLiked = false
                 renderComments()
                 likeButton.classList.remove('activeLike')
             }

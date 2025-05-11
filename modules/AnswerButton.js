@@ -4,7 +4,7 @@ export const AnswerButton = () => {
     const commentList = document.querySelectorAll('.comment')
     for (const comment of commentList) {
         comment.addEventListener('click', () => {
-            textcommentEl.innerHTML = `"${comments[comment.dataset.indexcomm].comm}" (${comments[comment.dataset.indexcomm].nick}),`
+            textcommentEl.innerHTML = `"${comments[comment.dataset.indexcomm].text}" (${comments[comment.dataset.indexcomm]["author"].name}),`
         })
     }
 }

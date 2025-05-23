@@ -31,7 +31,6 @@ addCommentEl.addEventListener('click', () => {
         }).then(response => {
             return response.json()
         }).then(data => {
-            //updateComments(data.comments)
             comments.push(newComment1);
             renderComments()
         })

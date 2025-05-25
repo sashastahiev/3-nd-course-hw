@@ -1,6 +1,7 @@
 import { comments } from '../modules/comments.js'
 import { initLikeButton } from '../modules/initLikeButton.js'
 import { AnswerButton } from '../modules/AnswerButton.js'
+import { format } from '../modules/formatDateComm.js'
 const commentEl = document.getElementById('comments')
 export const renderComments = () => {
     const newListComments = comments
@@ -8,7 +9,7 @@ export const renderComments = () => {
             return `<li class="comment" data-indexcomm="${index}">
           <div class="comment-header">
             <div>${comment["author"]["name"]}</div>
-            <div>${comment.date}</div>
+            <div>${comment.date.json}</div>
           </div>
           <div class="comment-body">
             <div class="comment-text">

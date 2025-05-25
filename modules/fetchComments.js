@@ -1,7 +1,7 @@
-import { renderComments } from '../modules/renderComments.js'
-import { updateComments } from '../modules/comments.js'
+import { renderComments } from './renderComments.js'
+import { updateComments } from './comments.js'
 
-export const fetchAndRengerComments = () => {
+export const fetchComments = () => {
     return fetch('https://wedev-api.sky.pro/api/v1/:stahiev-aleks/comments')
     .then(response => {
         return response.json()

@@ -1,2 +1,2 @@
-import { fetchAndRengerComments } from './modules/fetchAndRenderComments.js'
-fetchAndRengerComments()
+import { fetchComments } from './modules/fetchComments.js'
+fetchComments()

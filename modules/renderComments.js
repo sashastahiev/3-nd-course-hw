@@ -9,7 +9,7 @@ export const renderComments = () => {
             return `<li class="comment" data-indexcomm="${index}">
           <div class="comment-header">
             <div>${comment["author"]["name"]}</div>
-            <div>${comment.date.json}</div>
+            <div>${comment.date.replaceAll('T',' ').replaceAll('-','.').slice(0,-5)}</div>
           </div>
           <div class="comment-body">
             <div class="comment-text">

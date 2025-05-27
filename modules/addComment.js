@@ -1,13 +1,16 @@
-import { renderComments } from '../modules/renderComments.js'
 import { format } from '../modules/formatDateComm.js'
-import { comments, updateComments } from '../modules/comments.js'
-import { fetchComments } from './fetchComments.js'
+import { fetchPostComments } from './api.js'
 export const dateEl = new Date()
 export const textcommentEl = document.getElementById('text-comment')
 const addCommentEl = document.getElementById('addComment')
-const nameEl = document.getElementById('name-user')
+export const addForm = document.getElementById('add-form')
+export const nameEl = document.getElementById('name-user')
 addCommentEl.addEventListener('click', () => {
-    if (nameEl.value !== '' && textcommentEl.value !== '' && nameEl.value.length <= 3 && textcommentEl.value.trim === '') {
+    if ((nameEl.value != '') && 
+    (textcommentEl.value != '') && 
+    (nameEl.value.length > 3) && 
+    (textcommentEl.value.replaceAll(' ','') != '')) 
+    {
         const newComment2 = {
             name: nameEl.value.replaceAll('<', '&lt').replaceAll('>', '&gt'),
             date: format(dateEl),
@@ -17,28 +20,18 @@ addCommentEl.addEventListener('click', () => {
             likes: 0,
             isLiked: false,
         }
-        const addForm = document.getElementById('add-form')
         addForm.style.display = 'none';
         const message = document.createElement('p')
+        message.id = 'commentAdd'
         message.textContent = 'Комментарий добавляется...'
         const containerEl = document.getElementById('container')
         containerEl.appendChild(message)
-        fetch('https://wedev-api.sky.pro/api/v1/:stahiev-aleks/comments', {
-            method: 'POST', 
-            body: JSON.stringify(newComment2)
-        }).then(() => {
-            return fetchComments()
-        }).then(() => {
-            addForm.style.display = 'block'
-            message.remove()
-            textcommentEl.value = ''
-            nameEl.value = ''
-        })
+        fetchPostComments(newComment2, message)
     }
     else if (nameEl.value.length <= 3){
         alert('Имя должно состоять из более чем 3 символов');
     }
-    else if (textcommentEl.value.trim.length == 0){
+    else if (textcommentEl.value.replaceAll(' ','') == ''){
         alert('Нельзя отправить пустой комментарий')
     }
 })

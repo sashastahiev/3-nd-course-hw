@@ -1,2 +1,2 @@
-import { fetchComments } from './modules/fetchComments.js'
-fetchComments()
+import { fetchGetComments } from './modules/api.js'
+fetchGetComments()

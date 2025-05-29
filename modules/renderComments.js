@@ -1,7 +1,6 @@
 import { comments } from '../modules/comments.js'
 import { initLikeButton } from '../modules/initLikeButton.js'
 import { AnswerButton } from '../modules/AnswerButton.js'
-import { format } from '../modules/formatDateComm.js'
 const commentEl = document.getElementById('comments')
 export const renderComments = () => {
     const newListComments = comments

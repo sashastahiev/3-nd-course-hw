@@ -5,11 +5,12 @@ export const textcommentEl = document.getElementById('text-comment')
 const addCommentEl = document.getElementById('addComment')
 export const addForm = document.getElementById('add-form')
 export const nameEl = document.getElementById('name-user')
+const message = document.createElement('p')
+message.id = 'commentAdd'
+message.textContent = 'Комментарий добавляется...'
 addCommentEl.addEventListener('click', () => {
     if ((nameEl.value != '') && 
-    (textcommentEl.value != '') && 
-    (nameEl.value.length > 3) && 
-    (textcommentEl.value.replaceAll(' ','') != '')) 
+    (textcommentEl.value != '')) 
     {
         const newComment2 = {
             name: nameEl.value.replaceAll('<', '&lt').replaceAll('>', '&gt'),
@@ -21,17 +22,19 @@ addCommentEl.addEventListener('click', () => {
             isLiked: false,
         }
         addForm.style.display = 'none';
-        const message = document.createElement('p')
-        message.id = 'commentAdd'
-        message.textContent = 'Комментарий добавляется...'
         const containerEl = document.getElementById('container')
         containerEl.appendChild(message)
-        fetchPostComments(newComment2, message)
+        fetchPostComments(newComment2)
     }
-    else if (nameEl.value.length <= 3){
-        alert('Имя должно состоять из более чем 3 символов');
-    }
-    else if (textcommentEl.value.replaceAll(' ','') == ''){
-        alert('Нельзя отправить пустой комментарий')
-    }
+})
+export const thenNewAddCoomment = (() => {
+    addForm.style.display = 'block'
+    message.remove()
+    textcommentEl.value = ''
+    nameEl.value = ''
+})
+
+export const thenFinaly = (() => {
+    addForm.style.display = 'block'
+    message.remove()
 })

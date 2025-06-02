@@ -1,16 +1,14 @@
-import { renderComments } from './renderComments.js'
-import { updateComments } from './comments.js'
-import { nameEl, textcommentEl, addForm } from './addComment.js'
+import { renderAndUpdateComment } from '../index.js'
+import { addForm, thenFinaly, thenNewAddCoomment } from './addComment.js'
 export const fetchGetComments = () => {
     return fetch('https://wedev-api.sky.pro/api/v1/:stahiev-aleks/comments')
     .then(response => {
         return response.json()
-    }).then(data => {
-        updateComments(data.comments)
-        renderComments()
+    }).then((data) => {
+        renderAndUpdateComment(data)
     })
 }
-export const fetchPostComments = (newComment2, message) => {
+export const fetchPostComments = (newComment2) => {
     return fetch('https://wedev-api.sky.pro/api/v1/:stahiev-aleks/comments', {
     method: 'POST', 
     body: JSON.stringify(newComment2)
@@ -23,7 +21,7 @@ export const fetchPostComments = (newComment2, message) => {
                 throw new Error('Сервер упал')
             }
             if (response.status == 400){
-                throw new Error('Вы допустили ошибку')
+                throw new Error('Имя и текст сообщения не должны быть короче 3 символов')
             }
             throw new Error('Что-то пошло не так')
         }
@@ -31,14 +29,10 @@ export const fetchPostComments = (newComment2, message) => {
     .then(() => {
         return fetchGetComments()
     }).then(() => {
-        addForm.style.display = 'block'
-        message.remove()
-        textcommentEl.value = ''
-        nameEl.value = ''
+        thenNewAddCoomment()
     }).catch((error) => {
         alert(error)
     }).finally(() => {
-        addForm.style.display = 'block'
-        message.remove()
+        thenFinaly()
     })
 }

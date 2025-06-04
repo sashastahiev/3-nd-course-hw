@@ -1,3 +1,5 @@
+import { updateComments } from '../modules/comments.js'
+import { renderComments } from '../modules/renderComments.js'
 import { format } from '../modules/formatDateComm.js'
 import { fetchPostComments } from './api.js'
 export const dateEl = new Date()
@@ -24,17 +26,19 @@ addCommentEl.addEventListener('click', () => {
         addForm.style.display = 'none';
         const containerEl = document.getElementById('container')
         containerEl.appendChild(message)
-        fetchPostComments(newComment2)
+        fetchPostComments(newComment2).then((data) => {
+            updateComments(data.comments)
+            renderComments()
+        }).then(() => {
+            addForm.style.display = 'block'
+            message.remove()
+            textcommentEl.value = ''
+            nameEl.value = ''
+        }).catch((error) => {
+            alert(error)
+        }).finally(() => {
+            addForm.style.display = 'block'
+            message.remove()
+        })
     }
-})
-export const thenNewAddCoomment = (() => {
-    addForm.style.display = 'block'
-    message.remove()
-    textcommentEl.value = ''
-    nameEl.value = ''
-})
-
-export const thenFinaly = (() => {
-    addForm.style.display = 'block'
-    message.remove()
 })

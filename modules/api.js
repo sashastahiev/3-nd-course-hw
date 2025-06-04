@@ -1,11 +1,7 @@
-import { renderAndUpdateComment } from '../index.js'
-import { addForm, thenFinaly, thenNewAddCoomment } from './addComment.js'
 export const fetchGetComments = () => {
     return fetch('https://wedev-api.sky.pro/api/v1/:stahiev-aleks/comments')
     .then(response => {
         return response.json()
-    }).then((data) => {
-        renderAndUpdateComment(data)
     })
 }
 export const fetchPostComments = (newComment2) => {
@@ -28,11 +24,5 @@ export const fetchPostComments = (newComment2) => {
     })
     .then(() => {
         return fetchGetComments()
-    }).then(() => {
-        thenNewAddCoomment()
-    }).catch((error) => {
-        alert(error)
-    }).finally(() => {
-        thenFinaly()
     })
 }

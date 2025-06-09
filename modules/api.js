@@ -22,7 +22,4 @@ export const fetchPostComments = (newComment2) => {
             throw new Error('Что-то пошло не так')
         }
     })
-    .then(() => {
-        return fetchGetComments()
-    })
 }

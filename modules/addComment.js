@@ -1,7 +1,7 @@
 import { updateComments } from '../modules/comments.js'
 import { renderComments } from '../modules/renderComments.js'
 import { format } from '../modules/formatDateComm.js'
-import { fetchPostComments } from './api.js'
+import { fetchPostComments, fetchGetComments } from './api.js'
 export const dateEl = new Date()
 export const textcommentEl = document.getElementById('text-comment')
 const addCommentEl = document.getElementById('addComment')
@@ -26,7 +26,9 @@ addCommentEl.addEventListener('click', () => {
         addForm.style.display = 'none';
         const containerEl = document.getElementById('container')
         containerEl.appendChild(message)
-        fetchPostComments(newComment2).then((data) => {
+        fetchPostComments(newComment2).then(() => {
+            return fetchGetComments()
+        }).then((data) => {
             updateComments(data.comments)
             renderComments()
         }).then(() => {

@@ -1,11 +1,18 @@
+
+const autHost = "https://wedev-api.sky.pro/api/user"
+let token = ""
+export const setToken = (newToken) => {
+    token = newToken
+}
+
 export const fetchGetComments = () => {
-    return fetch('https://wedev-api.sky.pro/api/v1/:stahiev-aleks/comments')
+    return fetch('https://wedev-api.sky.pro/api/v2/:stahiev-aleks/comments')
     .then(response => {
         return response.json()
     })
 }
 export const fetchPostComments = (newComment2) => {
-    return fetch('https://wedev-api.sky.pro/api/v1/:stahiev-aleks/comments', {
+    return fetch('https://wedev-api.sky.pro/api/v2/:stahiev-aleks/comments', {
     method: 'POST', 
     body: JSON.stringify(newComment2)
     }).then((response) => {

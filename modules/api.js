@@ -1,10 +1,14 @@
 
-const autHost = "https://wedev-api.sky.pro/api/user"
-let token = ""
+const autHost = 'https://wedev-api.sky.pro/api/user'
+
+export let token = ""
 export const setToken = (newToken) => {
     token = newToken
 }
-
+export let name = ""
+export const setName = (newName) => {
+    name = newName
+}
 export const fetchGetComments = () => {
     return fetch('https://wedev-api.sky.pro/api/v2/:stahiev-aleks/comments')
     .then(response => {
@@ -35,7 +39,7 @@ export const fetchPostComments = (newComment2) => {
 }
 
 export const login = (login, password) => {
-    return fetch(autHost, {
+    return fetch(autHost + '/login', {
         method: 'POST',
         body: JSON.stringify({ login: login, password: password}),
     })

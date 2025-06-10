@@ -137,7 +137,7 @@ body {
     opacity: 0.9;
 }
 
-.add-form-registry {
+.add-form-registry, .add-form-auth {
     border: none;
     display: flex;
     flex-direction: column;
@@ -165,7 +165,7 @@ body {
     width: 512px;
 }
 
-.login-link {
+.login-link, .add-form-button-link {
     cursor: pointer;
 }
 

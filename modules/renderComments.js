@@ -1,4 +1,5 @@
 import { comments } from '../modules/comments.js'
+import { token } from '../modules/api.js'
 import { initLikeButton } from '../modules/initLikeButton.js'
 import { AnswerButton } from '../modules/AnswerButton.js'
 const commentEl = document.getElementById('comments')
@@ -33,4 +34,7 @@ export const renderComments = () => {
     }
     initLikeButton()
     AnswerButton()
+    if (!token){
+      document.querySelector('#form-add-comment').style.display = 'none'
+    }
 }

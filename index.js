@@ -20,7 +20,7 @@ formAuth.addEventListener('click', () =>{
     buttonEnter.addEventListener('click', () => {
         login(loginEl.value, passwordEl.value)
         .then((responce) => {
-            return responce.json
+            return responce.json()
         }).then(data => {
             setToken(data.user.token)
             setName(data.user.name)
@@ -35,4 +35,23 @@ const formRegis = document.querySelector('.entry')
 formRegis.addEventListener('click', () =>{
     document.querySelector('#authorization').style.display = 'none'
     document.querySelector('#regis').style.display = 'block'
+
+    const nameEl = document.querySelector('#nameRegis')
+    const loginEl = document.querySelector('#loginRegis')
+    const passwordEl = document.querySelector('#passwordRegis')
+    const buttonEnter = document.querySelector('#button-regis')
+
+    buttonEnter.addEventListener('click', () => {
+        registration(nameEl.value, loginEl.value, passwordEl.value)
+        .then((responce) => {
+            return responce.json()
+        }).then((data) => {
+            setToken(data.user.token)
+            setName(data.user.name)
+            document.querySelector('#comments').style.display = 'block'
+            document.querySelector('#regis').style.display = 'none'
+            document.querySelector('#form-add-comment').style.display = 'block'
+            document.querySelector('#name-user').value = loginEl.value
+        })
+    })
 })

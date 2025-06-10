@@ -11,12 +11,12 @@
     </style>
   </head>
   <body>
-    <div id="container" class="container">
+    <section id="container" class="container">
       <ul id="comments" class="comments">
         <!-- Комментарии -->
         <p>Пожалуйста подождите, идет загрузка комментариев...<p>
       </ul>
-      <div id="add-form" class="add-form">
+      <div id="form-add-comment" class="add-form">
         <input 
           id="name-user"
           type="text"
@@ -34,7 +34,57 @@
           <button id="addComment" class="add-form-button">Написать</button>
         </div>
       </div>
-    </div>
+      <section id="regis" class="add-form">
+        <h1 class="add-form-regis-title">Регистрация</h1>
+        <div class="add-form-inputs">
+          <input
+          type="text"
+          class="add-form-name"
+          placeholder="Введите имя"
+          id="nameRegis"
+          required>
+          <input
+          type="text"
+          class="add-form-name"
+          placeholder="Введите логин"
+          id="loginRegis"
+          required>
+          <input
+          type="text"
+          class="add-form-name"
+          placeholder="Введите пароль"
+          id="passwordRegis"
+          required>
+        </div>
+        <fieldset class="add-form-registry">
+          <button class="add-form-button">Зарегистрироваться</button>
+          <u class="add-form-button-link entry">
+            Войти
+          </u>
+        </fieldset>
+      </section>
+      <section id="authorization" class="add-form">
+        <h1 class="add-form-auth-title">Авторизация</h1>
+        <div class="add-form-inputs">
+          <input
+          type="text"
+          class="add-form-name"
+          placeholder="Введите логин"
+          id="loginAuth"
+          required>
+          <input
+          type="text"
+          class="add-form-name"
+          placeholder="Введите пароль"
+          id="passwordAuth"
+          required>
+        </div>
+        <fieldset class="add-form-registry">
+          <button class="add-form-button">Войти</button>
+        </fieldset>
+      </section>
+      <p>чтобы отправить комментарий, <u class="login-link">войдите</u></p>
+    </section>
   </body>
   <script type="module" src="./index.js"></script>
 </html>

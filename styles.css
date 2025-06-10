@@ -136,3 +136,36 @@ body {
 .add-form-button:hover {
     opacity: 0.9;
 }
+
+.add-form-registry {
+    border: none;
+    display: flex;
+    flex-direction: column;
+}
+
+.add-form-button-link {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.add-form-regis-title, .add-form-auth-title{
+    font-size: 30px;
+    display: flex;
+    justify-content: center;
+}
+.add-form-inputs {
+    width: 100%;
+    display: flex;
+    gap: 12px;
+    flex-direction: column;
+}
+#loginRegis, #nameRegis, #passwordRegis,
+#loginAuth, #passwordAuth{
+    width: 512px;
+}
+
+.login-link {
+    text-emphasis: none;
+}
+

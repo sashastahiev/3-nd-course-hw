@@ -5,3 +5,6 @@ fetchGetComments().then((data) => {
     updateComments(data.comments)
     renderComments()
 })
+document.querySelector("#authorization").style.display = "none"
+document.querySelector("#regis").style.display = "none"
+document.querySelector("#form-add-comment").style.display = "none"

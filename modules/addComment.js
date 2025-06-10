@@ -5,7 +5,7 @@ import { fetchPostComments, fetchGetComments } from './api.js'
 export const dateEl = new Date()
 export const textcommentEl = document.getElementById('text-comment')
 const addCommentEl = document.getElementById('addComment')
-export const addForm = document.getElementById('add-form')
+export const addForm = document.getElementById('form-add-comment')
 export const nameEl = document.getElementById('name-user')
 const message = document.createElement('p')
 message.id = 'commentAdd'

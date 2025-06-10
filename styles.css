@@ -166,6 +166,6 @@ body {
 }
 
 .login-link {
-    text-emphasis: none;
+    cursor: pointer;
 }
 

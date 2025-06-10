@@ -14,6 +14,9 @@ export const fetchGetComments = () => {
 export const fetchPostComments = (newComment2) => {
     return fetch('https://wedev-api.sky.pro/api/v2/:stahiev-aleks/comments', {
     method: 'POST', 
+    headers: {
+        Authorization: `Bearer ${token}`,
+    },
     body: JSON.stringify(newComment2)
     }).then((response) => {
         if (response.status == 201){
@@ -28,5 +31,19 @@ export const fetchPostComments = (newComment2) => {
             }
             throw new Error('Что-то пошло не так')
         }
+    })
+}
+
+export const login = (login, password) => {
+    return fetch(autHost, {
+        method: 'POST',
+        body: JSON.stringify({ login: login, password: password}),
+    })
+}
+
+export const registration = (name, login, password) => {
+    return fetch(autHost, {
+        method: 'POST',
+        body: JSON.stringify({ name: name, login: login, password:password}),
     })
 }

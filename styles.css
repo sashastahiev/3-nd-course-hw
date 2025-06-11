@@ -34,7 +34,7 @@ body {
     border-radius: 20px;
 }
 
-.comments {
+.comments, #comments {
     display: flex;
     flex-direction: column;
     gap: 24px;

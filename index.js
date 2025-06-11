@@ -9,7 +9,7 @@ document.querySelector("#authorization").style.display = "none"
 document.querySelector("#regis").style.display = "none"
 const formAuth = document.querySelector('.login-link')
 formAuth.addEventListener('click', () =>{
-    document.querySelector('#comments').style.display = 'none'
+    document.querySelector('.comments').style.display = 'none'
     document.querySelector('#authorization').style.display = 'block'
     document.querySelector('#alert-auth').style.display = 'none'
 
@@ -19,15 +19,21 @@ formAuth.addEventListener('click', () =>{
 
     buttonEnter.addEventListener('click', () => {
         login(loginEl.value, passwordEl.value)
-        .then((responce) => {
-            return responce.json()
+        .then((response) => {
+        if (response.status == 400){
+            throw new Error('Неправильно введено имя или пароль')
+        } else {
+            return response.json()
+        }
         }).then(data => {
             setToken(data.user.token)
             setName(data.user.name)
-            document.querySelector('#comments').style.display = 'block'
+            document.querySelector('.comments').style.display = 'block'
             document.querySelector('#authorization').style.display = 'none'
             document.querySelector('#form-add-comment').style.display = 'block'
             document.querySelector('#name-user').value = loginEl.value
+        }).catch((error) => {
+            alert(error)
         })
     })
 })
@@ -48,7 +54,7 @@ formRegis.addEventListener('click', () =>{
         }).then((data) => {
             setToken(data.user.token)
             setName(data.user.name)
-            document.querySelector('#comments').style.display = 'block'
+            document.querySelector('.comments').style.display = 'block'
             document.querySelector('#regis').style.display = 'none'
             document.querySelector('#form-add-comment').style.display = 'block'
             document.querySelector('#name-user').value = loginEl.value

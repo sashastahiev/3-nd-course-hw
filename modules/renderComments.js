@@ -26,6 +26,9 @@ export const renderComments = () => {
         })
         .join('')
     commentEl.innerHTML = newListComments
+    if (!token){
+      document.querySelector('#form-add-comment').style.display = 'none'
+    }
     const LikeButtons = document.querySelectorAll('.like-button')
     for (const likeButton of LikeButtons) {
         if (comments[likeButton.dataset.index].isLiked) {

@@ -4,3 +4,4 @@ formAuth.addEventListener('click', () =>{
     document.querySelector('#authorization').style.display = 'block'
     console.log("ecgtiyj")
 })
+console.log("ghbdtn")

@@ -4,9 +4,9 @@ import { format } from '../modules/formatDateComm.js'
 import { fetchPostComments, fetchGetComments } from './api.js'
 export const dateEl = new Date()
 export const textcommentEl = document.getElementById('text-comment')
-const addCommentEl = document.getElementById('addComment')
 export const addForm = document.getElementById('form-add-comment')
 export const nameEl = document.getElementById('name-user')
+const addCommentEl = document.getElementById('addComment')
 const message = document.createElement('p')
 message.id = 'commentAdd'
 message.textContent = 'Комментарий добавляется...'
@@ -44,3 +44,27 @@ addCommentEl.addEventListener('click', () => {
         })
     }
 })
+
+export const initFormAddComment = () => {
+    const containerEl = document.querySelector('#container')
+    containerEl.innerHTML += `
+    <div id="form-add-comment" class="add-form">
+      <input 
+        id="name-user"
+        type="text"
+        class="add-form-name"
+        placeholder="Введите ваше имя"
+        readonly
+      />
+      <textarea
+        id="text-comment"
+        type="textarea"
+        class="add-form-text"
+        placeholder="Введите ваш коментарий"
+        rows="4"
+      ></textarea>
+      <div class="add-form-row">
+        <button id="addComment" class="add-form-button">Написать</button>
+      </div>
+    </div>`
+}

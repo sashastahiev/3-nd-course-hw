@@ -2,8 +2,10 @@ import { comments } from '../modules/comments.js'
 import { token } from '../modules/api.js'
 import { initLikeButton } from '../modules/initLikeButton.js'
 import { AnswerButton } from '../modules/AnswerButton.js'
+import { initFormAddComment } from './addComment.js'
+import { renderFormAuth, renderFormRegis } from '../index.js'
 export const renderComments = () => {
-  const commentEl = document.getElementById('comments')
+  const containerEl = document.querySelector('#container')
   const newListComments = comments
     .map((comment, index) => {
       return `<li class="comment" data-indexcomm="${index}">
@@ -25,9 +27,19 @@ export const renderComments = () => {
       </li>`
       })
       .join('')
-    commentEl.innerHTML = newListComments
-    if (!token){
-      document.querySelector('#form-add-comment').style.display = 'none'
+    containerEl.innerHTML = `<ul id="comments" class="comments">${newListComments}</ul>`
+    if (token){
+      initFormAddComment()
+    } else {
+      containerEl.innerHTML += `<p id="alert-auth">чтобы отправить комментарий, <u class="login-link">войдите</u></p>`
+      const formAuth = document.querySelector('.login-link')
+      formAuth.addEventListener('click', () =>{
+      renderFormAuth()
+      const buttonOpenRegis = document.querySelector('.entry')
+      buttonOpenRegis.addEventListener('click', () => {
+        renderFormRegis()
+    })
+})
     }
     const LikeButtons = document.querySelectorAll('.like-button')
     for (const likeButton of LikeButtons) {

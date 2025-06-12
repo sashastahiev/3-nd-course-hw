@@ -1,13 +1,12 @@
 import { fetchGetComments, login, registration, setToken, setName} from './modules/api.js'
 import { updateComments } from './modules/comments.js'
 import { renderComments, initListComments } from '../modules/renderComments.js'
-import { initFormAddComment } from './modules/addComment.js'
 fetchGetComments().then((data) => {
     updateComments(data.comments)
     renderComments()
 })
 
-const renderFormAuth = () => {
+export const renderFormAuth = () => {
     const containerEl = document.querySelector('#container')
     containerEl.innerHTML = `<section id="authorization" class="add-form">
         <h1 class="add-form-auth-title">Авторизация</h1>
@@ -32,8 +31,29 @@ const renderFormAuth = () => {
           </u>
         </fieldset>
       </section>`
+    const loginEl = document.querySelector('#loginAuth')
+    const passwordEl = document.querySelector('#passwordAuth')
+    const buttonEnter = document.querySelector('#button-enter')
+    buttonEnter.addEventListener('click', () => {
+        login(loginEl.value, passwordEl.value)
+        .then((response) => {
+        if (response.status == 400){
+            throw new Error('Неправильно введено имя или пароль')
+        } else {
+            return response.json()
+        }
+        }).then(data => {
+            setToken(data.user.token)
+            setName(data.user.name)
+            updateComments(data.comments)
+            renderComments()
+            document.querySelector('#name-user').value = loginEl.value
+        }).catch((error) => {
+            alert(error)
+        })
+    })
 }
-const renderFormRegis = () => {
+export const renderFormRegis = () => {
     const containerEl = document.querySelector('#container')
     containerEl.innerHTML = `<section id="regis" class="add-form">
         <h1 class="add-form-regis-title">Регистрация</h1>
@@ -61,27 +81,22 @@ const renderFormRegis = () => {
           <button id="button-regis" class="add-form-button">Зарегистрироваться</button>
         </fieldset>
       </section>`
-}
+    const nameEl = document.querySelector('#nameRegis')
+    const loginEl = document.querySelector('#loginRegis')
+    const passwordEl = document.querySelector('#passwordRegis')
+    const buttonEnter = document.querySelector('#button-regis')
 
-const formAuth = document.querySelector('.login-link')
-formAuth.addEventListener('click', () =>{
-    renderFormAuth()
-    const loginEl = document.querySelector('#loginAuth')
-    const passwordEl = document.querySelector('#passwordAuth')
-    const buttonEnter = document.querySelector('#button-enter')
     buttonEnter.addEventListener('click', () => {
-        login(loginEl.value, passwordEl.value)
+        registration(nameEl.value, loginEl.value, passwordEl.value)
         .then((response) => {
         if (response.status == 400){
             throw new Error('Неправильно введено имя или пароль')
         } else {
             return response.json()
         }
-        }).then(data => {
+        }).then((data) => {
             setToken(data.user.token)
             setName(data.user.name)
-            initListComments()
-            initFormAddComment()
             updateComments(data.comments)
             renderComments()
             document.querySelector('#name-user').value = loginEl.value
@@ -89,33 +104,4 @@ formAuth.addEventListener('click', () =>{
             alert(error)
         })
     })
-    const buttonOpenRegis = document.querySelector('.entry')
-    buttonOpenRegis.addEventListener('click', () => {
-        renderFormRegis()
-        const nameEl = document.querySelector('#nameRegis')
-        const loginEl = document.querySelector('#loginRegis')
-        const passwordEl = document.querySelector('#passwordRegis')
-        const buttonEnter = document.querySelector('#button-regis')
-
-        buttonEnter.addEventListener('click', () => {
-            registration(nameEl.value, loginEl.value, passwordEl.value)
-            .then((response) => {
-            if (response.status == 400){
-                throw new Error('Неправильно введено имя или пароль')
-            } else {
-                return response.json()
-            }
-            }).then((data) => {
-                setToken(data.user.token)
-                setName(data.user.name)
-                initListComments()
-                initFormAddComment()
-                updateComments(data.comments)
-                renderComments()
-                document.querySelector('#name-user').value = loginEl.value
-            }).catch((error) => {
-                alert(error)
-            })
-        })
-    })
-})
+}
